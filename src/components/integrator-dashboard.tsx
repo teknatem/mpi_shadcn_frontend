@@ -17,28 +17,14 @@ import {
   ChevronRight,
   Settings,
   Moon,
-  User,
   LogOut,
   Bell,
   Columns,
   BarChart3,
-  Filter,
-  ChevronLeft,
-  ChevronRight as ChevronRightIcon,
-  ChevronsLeft,
-  ChevronsRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import {
   Collapsible,
   CollapsibleContent,
@@ -51,6 +37,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
+import { RecordsTable } from "@/components/records-table";
 
 interface MenuItem {
   id: string;
@@ -311,270 +298,7 @@ export function IntegratorDashboard() {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col overflow-hidden bg-slate-900/20">
-          {/* Toolbar */}
-          <div className="border-b border-slate-800/60 bg-slate-900/40 backdrop-blur-sm p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <Button
-                  size="sm"
-                  className="gap-2 bg-blue-600 hover:bg-blue-500 shadow-lg shadow-blue-500/20"
-                >
-                  <RefreshCcw className="h-4 w-4" />
-                  Обновить
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-2 border-slate-700/50 hover:bg-slate-800/50"
-                >
-                  <span>Post (0)</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-2 border-slate-700/50 hover:bg-slate-800/50"
-                >
-                  <span>Unpost (0)</span>
-                </Button>
-                <Separator
-                  orientation="vertical"
-                  className="h-6 bg-slate-700/50"
-                />
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-2 border-emerald-700/50 text-emerald-400 hover:bg-emerald-900/20 hover:border-emerald-600/50"
-                >
-                  <Download className="h-4 w-4" />
-                  Excel
-                </Button>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-2 border-slate-700/50 hover:bg-slate-800/50"
-                >
-                  <Filter className="h-4 w-4" />
-                  Фильтры
-                  <Badge
-                    variant="secondary"
-                    className="ml-1 bg-blue-600/20 text-blue-400 border border-blue-500/30"
-                  >
-                    2
-                  </Badge>
-                </Button>
-              </div>
-
-              <div className="flex items-center gap-1.5">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-slate-800/50"
-                >
-                  <ChevronsLeft className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-slate-800/50"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                <div className="px-3 py-1 bg-slate-800/50 rounded-md border border-slate-700/50">
-                  <span className="text-sm font-medium">1 / 1 (0)</span>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-slate-800/50"
-                >
-                  <ChevronRightIcon className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 hover:bg-slate-800/50"
-                >
-                  <ChevronsRight className="h-4 w-4" />
-                </Button>
-                <select className="h-8 px-3 bg-slate-800/50 border border-slate-700/50 rounded-md text-sm hover:bg-slate-800 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500/50">
-                  <option>100</option>
-                  <option>50</option>
-                  <option>25</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* Table Content */}
-          <div className="flex-1 overflow-hidden flex">
-            <div className="flex-1 overflow-auto bg-slate-900/30">
-              <Table>
-                <TableHeader className="sticky top-0 bg-slate-900/95 backdrop-blur-sm shadow-lg z-10">
-                  <TableRow className="border-slate-800/60 hover:bg-transparent">
-                    <TableHead className="w-12">
-                      <input
-                        type="checkbox"
-                        className="rounded border-slate-600 bg-slate-800/50"
-                      />
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-300">
-                      <button className="flex items-center gap-1 hover:text-slate-100 transition-colors">
-                        Дата
-                        <ChevronDown className="h-3.5 w-3.5" />
-                      </button>
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-300">
-                      <button className="flex items-center gap-1 hover:text-slate-100 transition-colors">
-                        Return №
-                        <ChevronDown className="h-3.5 w-3.5" />
-                      </button>
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-300">
-                      <button className="flex items-center gap-1 hover:text-slate-100 transition-colors">
-                        Order №
-                        <ChevronDown className="h-3.5 w-3.5" />
-                      </button>
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-300">
-                      <button className="flex items-center gap-1 hover:text-slate-100 transition-colors">
-                        Тип
-                        <ChevronDown className="h-3.5 w-3.5" />
-                      </button>
-                    </TableHead>
-                    <TableHead className="font-semibold text-slate-300">
-                      <button className="flex items-center gap-1 hover:text-slate-100 transition-colors">
-                        Статус
-                        <ChevronDown className="h-3.5 w-3.5" />
-                      </button>
-                    </TableHead>
-                    <TableHead className="text-right font-semibold text-slate-300">
-                      Шт.
-                    </TableHead>
-                    <TableHead className="text-right font-semibold text-slate-300">
-                      Сумма
-                    </TableHead>
-                    <TableHead className="w-12"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow className="hover:bg-slate-800/30">
-                    <TableCell
-                      colSpan={9}
-                      className="text-center text-slate-400 py-16"
-                    >
-                      <div className="flex flex-col items-center gap-3">
-                        <div className="p-4 bg-slate-800/30 rounded-full">
-                          <FileText className="h-8 w-8 text-slate-500" />
-                        </div>
-                        <div>
-                          <p className="mb-1 text-base font-medium text-slate-300">
-                            Записей: 0
-                          </p>
-                          <p className="text-sm text-slate-500">
-                            Возвр: 0 / Невыкс: 0
-                          </p>
-                        </div>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-              <div className="border-t border-slate-800/60 bg-slate-900/60 backdrop-blur-sm px-4 py-2.5 shadow-lg">
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-4">
-                    <span className="text-slate-400">
-                      Записей:{" "}
-                      <span className="font-semibold text-slate-300">0</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <span className="text-slate-400">
-                      Количество:{" "}
-                      <span className="font-semibold text-slate-300">0</span>
-                    </span>
-                    <span className="text-slate-400">
-                      Сумма:{" "}
-                      <span className="font-semibold text-slate-300">
-                        -0.00
-                      </span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Sidebar - Logs */}
-            <aside className="w-96 border-l border-slate-800/60 bg-slate-900/40 backdrop-blur-sm flex flex-col shadow-2xl">
-              <div className="border-b border-slate-800/60 p-4 bg-slate-900/60">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <div className="p-1.5 bg-purple-600/10 rounded-md border border-purple-500/20">
-                      <FileText className="h-4 w-4 text-purple-400" />
-                    </div>
-                    <h3 className="font-semibold text-slate-100">
-                      Логи системы
-                    </h3>
-                  </div>
-                  <div className="flex gap-1">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 px-2 hover:bg-slate-800/50"
-                    >
-                      <RefreshCcw className="h-3.5 w-3.5" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 px-2 hover:bg-slate-800/50 text-red-400 hover:text-red-300"
-                    >
-                      Очистить
-                    </Button>
-                  </div>
-                </div>
-              </div>
-              <div className="flex-1 overflow-auto">
-                <Table>
-                  <TableHeader className="sticky top-0 bg-slate-900/95 backdrop-blur-sm">
-                    <TableRow className="border-slate-800/60">
-                      <TableHead className="w-24 text-xs font-semibold text-slate-400">
-                        Время
-                      </TableHead>
-                      <TableHead className="w-28 text-xs font-semibold text-slate-400">
-                        Источник
-                      </TableHead>
-                      <TableHead className="w-28 text-xs font-semibold text-slate-400">
-                        Категория
-                      </TableHead>
-                      <TableHead className="text-xs font-semibold text-slate-400">
-                        Сообщение
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    <TableRow className="hover:bg-slate-800/20">
-                      <TableCell
-                        colSpan={4}
-                        className="text-center text-slate-400 py-12"
-                      >
-                        <div className="flex flex-col items-center gap-2">
-                          <div className="p-3 bg-slate-800/30 rounded-full">
-                            <FileText className="h-6 w-6 text-slate-500" />
-                          </div>
-                          <p className="text-sm">Логов пока нет</p>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-            </aside>
-          </div>
+          <RecordsTable />
         </main>
       </div>
     </div>
